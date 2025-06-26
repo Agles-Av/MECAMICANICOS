@@ -1,11 +1,14 @@
 package utez.camila.camica.modules.usuarios;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import utez.camila.camica.modules.roles.Roles;
 import utez.camila.camica.modules.vehiculos.Vehiculo;
+import utez.camila.camica.modules.vehserv.VehServe;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +27,7 @@ public class Usuario {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @JsonIgnore
     @Column(name = "contrasena", nullable = false)
     private String contrasena;
 
@@ -39,17 +43,13 @@ public class Usuario {
     @JsonIgnoreProperties(value = {"usuario"})
     private Roles role;
 
-    @ManyToMany
-    @JoinTable(
-            name = "usuario_vehiculos",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "vehiculo_id")
-    )
-    @JsonIgnoreProperties(value = {"usuarios"})
-    private Set<Vehiculo> vehiculos = new HashSet<>();
+    @OneToMany(mappedBy = "duenio",cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties(value = {"duenio"})
+    private List<Vehiculo> vehiculo;
 
-    public Usuario() {
-    }
+    @OneToMany(mappedBy = "mecanico", cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties(value = {"mecanico"})
+    private List<VehServe> servicios;
 
     public Usuario(String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role) {
         this.nombre = nombre;
@@ -61,27 +61,7 @@ public class Usuario {
         this.role = role;
     }
 
-    public Usuario(String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role, Set<Vehiculo> vehiculos) {
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.contrasena = contrasena;
-        this.telefono = telefono;
-        this.status = status;
-        this.role = role;
-        this.vehiculos = vehiculos;
-    }
-
-    public Usuario(Long id, String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role, Set<Vehiculo> vehiculos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.email = email;
-        this.contrasena = contrasena;
-        this.telefono = telefono;
-        this.status = status;
-        this.role = role;
-        this.vehiculos = vehiculos;
+    public Usuario() {
     }
 
     public Long getId() {
@@ -132,7 +112,7 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
@@ -148,11 +128,32 @@ public class Usuario {
         this.role = role;
     }
 
-    public Set<Vehiculo> getVehiculos() {
-        return vehiculos;
+    public List<Vehiculo> getVehiculo() {
+        return vehiculo;
     }
 
-    public void setVehiculos(Set<Vehiculo> vehiculos) {
-        this.vehiculos = vehiculos;
+    public void setVehiculo(List<Vehiculo> vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+
+    public List<VehServe> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<VehServe> servicios) {
+        this.servicios = servicios;
+    }
+
+    public Usuario(Long id, String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role, List<Vehiculo> vehiculo, List<VehServe> servicios) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.telefono = telefono;
+        this.status = status;
+        this.role = role;
+        this.vehiculo = vehiculo;
+        this.servicios = servicios;
     }
 }

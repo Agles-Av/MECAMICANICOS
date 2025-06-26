@@ -4,10 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import utez.camila.camica.modules.categoria.Categoria;
 import utez.camila.camica.modules.estadoVehiculo.EstadoVehiculo;
+import utez.camila.camica.modules.roles.Roles;
 import utez.camila.camica.modules.servicio.Servicio;
 import utez.camila.camica.modules.usuarios.Usuario;
+import utez.camila.camica.modules.vehserv.VehServe;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "vehiculo")
@@ -29,57 +32,34 @@ public class Vehiculo {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    @ManyToMany(mappedBy = "vehiculos")
-    @JsonIgnoreProperties(value = {"vehiculos"})
-    private List<Servicio> servicios;
-
-
-    @ManyToMany(mappedBy = "vehiculos")
-    @JsonIgnoreProperties(value = {"vehiculos"})
-    private List<Usuario> usuarios;
-
     @ManyToOne
-    @JoinColumn(name = "id_estado_vehiculo", nullable = false)
-    @JsonIgnoreProperties(value = {"vehiculos"})
-    private EstadoVehiculo estado;
+    @JoinColumn(name = "id_usuario")
+    @JsonIgnoreProperties(value = {"usuario"})
+    private Usuario duenio;
 
-    public EstadoVehiculo getEstado() {
-        return estado;
+    @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties(value = {"vehiculo"})
+    private List<VehServe> servicios;
+
+    public Vehiculo() {
     }
 
-    public void setEstado(EstadoVehiculo estado) {
-        this.estado = estado;
-    }
-
-    public Vehiculo(String marca, String modelo, String color, Boolean status) {
+    public Vehiculo(String marca, String modelo, String color, Boolean status, Usuario duenio) {
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
         this.status = status;
+        this.duenio = duenio;
     }
 
-    public Vehiculo(String marca, String modelo, String color, Boolean status, List<Servicio> servicios, List<Usuario> usuarios, EstadoVehiculo estado) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.color = color;
-        this.status = status;
-        this.servicios = servicios;
-        this.usuarios = usuarios;
-        this.estado = estado;
-    }
-
-    public Vehiculo(Long id, String marca, String modelo, String color, Boolean status, List<Servicio> servicios, List<Usuario> usuarios, EstadoVehiculo estado) {
+    public Vehiculo(Long id, String marca, String modelo, String color, Boolean status, Usuario duenio, List<VehServe> servicios) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
         this.color = color;
         this.status = status;
+        this.duenio = duenio;
         this.servicios = servicios;
-        this.usuarios = usuarios;
-        this.estado = estado;
-    }
-
-    public Vehiculo() {
     }
 
     public Long getId() {
@@ -114,7 +94,7 @@ public class Vehiculo {
         this.color = color;
     }
 
-    public boolean isStatus() {
+    public Boolean getStatus() {
         return status;
     }
 
@@ -122,19 +102,19 @@ public class Vehiculo {
         this.status = status;
     }
 
-    public List<Servicio> getServicios() {
+    public Usuario getDuenio() {
+        return duenio;
+    }
+
+    public void setDuenio(Usuario duenio) {
+        this.duenio = duenio;
+    }
+
+    public List<VehServe> getServicios() {
         return servicios;
     }
 
-    public void setServicios(List<Servicio> servicios) {
+    public void setServicios(List<VehServe> servicios) {
         this.servicios = servicios;
-    }
-
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
     }
 }

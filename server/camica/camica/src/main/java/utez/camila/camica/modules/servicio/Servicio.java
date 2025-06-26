@@ -5,8 +5,10 @@ import jakarta.persistence.*;
 import utez.camila.camica.modules.categoria.Categoria;
 import utez.camila.camica.modules.roles.Roles;
 import utez.camila.camica.modules.vehiculos.Vehiculo;
+import utez.camila.camica.modules.vehserv.VehServe;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,41 +30,28 @@ public class Servicio {
     @JsonIgnoreProperties(value = {"servicio"})
     private Categoria categoria;
 
-    @ManyToMany
-    @JoinTable(
-            name = "servicio_vehiculos",
-            joinColumns = @JoinColumn(name = "servicio_id"),
-            inverseJoinColumns = @JoinColumn(name = "vehiculo_id")
-    )
-    @JsonIgnoreProperties(value = {"servicios"})
-    private Set<Vehiculo> vehiculos = new HashSet<>();
 
     @Column(name = "status", nullable = false)
     private Boolean status;
 
-    public Servicio(String nombre, String descripcion, Categoria categoria, Set<Vehiculo> vehiculos, Boolean status) {
+    @OneToMany(mappedBy = "servicio", cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties(value = {"servicio"})
+    private List<VehServe> servicioVehiculo;
+
+    public Servicio(String nombre, String descripcion, Categoria categoria, Boolean status) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;
-        this.vehiculos = vehiculos;
         this.status = status;
     }
 
-    public Servicio(Long id, String nombre, String descripcion, Categoria categoria, Set<Vehiculo> vehiculos, Boolean status) {
+    public Servicio(Long id, String nombre, String descripcion, Categoria categoria, Boolean status, List<VehServe> servicioVehiculo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.categoria = categoria;
-        this.vehiculos = vehiculos;
         this.status = status;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+        this.servicioVehiculo = servicioVehiculo;
     }
 
     public Long getId() {
@@ -97,35 +86,22 @@ public class Servicio {
         this.categoria = categoria;
     }
 
-    public Set<Vehiculo> getVehiculos() {
-        return vehiculos;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setVehiculos(Set<Vehiculo> vehiculos) {
-        this.vehiculos = vehiculos;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
-    public Servicio(String nombre, String descripcion, Categoria categoria) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
+    public List<VehServe> getServicioVehiculo() {
+        return servicioVehiculo;
     }
 
-    public Servicio(String nombre, String descripcion, Categoria categoria, Set<Vehiculo> vehiculos) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.vehiculos = vehiculos;
+    public void setServicioVehiculo(List<VehServe> servicioVehiculo) {
+        this.servicioVehiculo = servicioVehiculo;
     }
 
     public Servicio() {
-    }
-
-    public Servicio(Long id, String nombre, String descripcion, Categoria categoria, Set<Vehiculo> vehiculos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.vehiculos = vehiculos;
     }
 }

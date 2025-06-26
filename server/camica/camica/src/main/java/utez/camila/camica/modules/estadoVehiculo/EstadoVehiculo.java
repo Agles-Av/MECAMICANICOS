@@ -1,9 +1,11 @@
 package utez.camila.camica.modules.estadoVehiculo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import utez.camila.camica.modules.usuarios.Usuario;
 import utez.camila.camica.modules.vehiculos.Vehiculo;
+import utez.camila.camica.modules.vehserv.VehServe;
 
 import java.util.List;
 
@@ -18,18 +20,22 @@ public class EstadoVehiculo {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "estado",cascade = CascadeType.PERSIST)
-    private List<Vehiculo> vehiculos;
+
+    @OneToMany(mappedBy = "estado", cascade = CascadeType.PERSIST)
+    @JsonIgnoreProperties(value = {"vehiculo","estado"})
+    private List<VehServe> servicios;
+
+    public EstadoVehiculo() {
+    }
 
     public EstadoVehiculo(String nombre) {
         this.nombre = nombre;
     }
 
-    public EstadoVehiculo(Long id, String nombre, List<Vehiculo> vehiculos) {
+    public EstadoVehiculo(Long id, String nombre, List<VehServe> servicios) {
         this.id = id;
         this.nombre = nombre;
-        this.vehiculos = vehiculos;
+        this.servicios = servicios;
     }
 
     public Long getId() {
@@ -48,14 +54,11 @@ public class EstadoVehiculo {
         this.nombre = nombre;
     }
 
-    public List<Vehiculo> getVehiculos() {
-        return vehiculos;
+    public List<VehServe> getServicios() {
+        return servicios;
     }
 
-    public void setVehiculos(List<Vehiculo> vehiculos) {
-        this.vehiculos = vehiculos;
-    }
-
-    public EstadoVehiculo() {
+    public void setServicios(List<VehServe> servicios) {
+        this.servicios = servicios;
     }
 }
