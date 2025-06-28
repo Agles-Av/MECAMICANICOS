@@ -7,6 +7,7 @@ import utez.camila.camica.modules.roles.Roles;
 import utez.camila.camica.modules.vehiculos.Vehiculo;
 import utez.camila.camica.modules.vehserv.VehServe;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -50,6 +51,39 @@ public class Usuario {
     @OneToMany(mappedBy = "mecanico", cascade = CascadeType.PERSIST)
     @JsonIgnoreProperties(value = {"mecanico"})
     private List<VehServe> servicios;
+
+    @Column(name = "intentos_fallidos")
+    private Integer intentosFallidos = 0;
+
+    @Column(name = "bloqueado_hasta")
+    private LocalDateTime bloqueadoHasta;
+
+    public Integer getIntentosFallidos() {
+        return intentosFallidos;
+    }
+
+    public void setIntentosFallidos(Integer intentosFallidos) {
+        this.intentosFallidos = intentosFallidos;
+    }
+
+    public LocalDateTime getBloqueadoHasta() {
+        return bloqueadoHasta;
+    }
+
+    public void setBloqueadoHasta(LocalDateTime bloqueadoHasta) {
+        this.bloqueadoHasta = bloqueadoHasta;
+    }
+
+    public Usuario(Long id, String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.telefono = telefono;
+        this.status = status;
+        this.role = role;
+    }
 
     public Usuario(String nombre, String apellidos, String email, String contrasena, String telefono, Boolean status, Roles role) {
         this.nombre = nombre;
