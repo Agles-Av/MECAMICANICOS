@@ -1,4 +1,4 @@
-package utez.camila.camica.modules.roles;
+package utez.camila.camica.modules.estadoVehiculo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/api/estado-vehiculo")
 @CrossOrigin("*")
-public class RolesController {
+public class EstadoController {
     @Autowired
-    private RolesRepository rolesRepository;
+    private EstadoService estadoService;
 
     @GetMapping("/")
     public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(rolesRepository.findAll());
+        return estadoService.getAll();
     }
 }

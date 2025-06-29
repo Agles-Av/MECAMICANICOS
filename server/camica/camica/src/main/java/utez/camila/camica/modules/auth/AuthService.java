@@ -120,7 +120,7 @@ public class AuthService {
             return customResponse.get400Response(404);
         Usuario user = foundUser.get();
         user.setContrasena(encoder.encode(coso.getPassword()));
-        return customResponse.getJSONResponse(useRepository.save(user));
+        return customResponse.getJSONResponse(useRepository.saveAndFlush(user));
     }
 
 
