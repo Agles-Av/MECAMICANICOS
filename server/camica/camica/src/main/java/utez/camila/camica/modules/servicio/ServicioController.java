@@ -16,6 +16,15 @@ public class ServicioController {
         return servicioService.getAll();
     }
 
+    @GetMapping("status/true")
+    public ResponseEntity<?> getByStatusTrue() {
+        return servicioService.getByStatusTrue();
+    }
+    @GetMapping("status/false")
+    public ResponseEntity<?> getByStatusFalse() {
+        return servicioService.getByStatusFalse();
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody ServicioDto servicioDto) {
         return servicioService.save(servicioDto.toEntity());

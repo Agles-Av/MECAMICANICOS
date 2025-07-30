@@ -31,6 +31,15 @@ public class VehiculoService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getActiveVehicles() {
+        return response.getJSONResponse(vehiculoRepository.findByActivoTrue());
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getInactiveVehicles() {
+        return response.getJSONResponse(vehiculoRepository.findByActivoFalse());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> getByDuenio(Long duenioId) {
         Optional<Usuario> foundDuenio = usuarioRepository.findById(duenioId);
         if (foundDuenio.isEmpty()) {

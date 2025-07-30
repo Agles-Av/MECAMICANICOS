@@ -36,6 +36,15 @@ public class CategoriaService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getByStatusTrue() {
+        return response.getJSONResponse(categoriaRepository.findByStatusTrue());
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getByStatusFalse() {
+        return response.getJSONResponse(categoriaRepository.findByStatusFalse());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(Categoria categoria) {
         Optional<Categoria> existingCategoria = categoriaRepository.findByNombre(categoria.getNombre());
         if (existingCategoria.isPresent()) {
@@ -72,4 +81,5 @@ public class CategoriaService {
         bitacoraService.registrarBitacora("CHANGE_STATUS", "vehServ", existingCategoria.get(), updatedCategoria);
         return response.getJSONResponse(updatedCategoria);
     }
+
 }
