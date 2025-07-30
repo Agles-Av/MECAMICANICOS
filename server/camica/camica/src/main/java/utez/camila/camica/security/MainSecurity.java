@@ -70,27 +70,23 @@ public class MainSecurity implements WebMvcConfigurer {
 
     private final static String[] WHITE_LIST ={
             "/api/test",
-            "/api/auth/login",
+            "/api/auth/**",
             "/v3/api-docs/**",
             "/swagger-ui.html",
             "/swagger-ui/**"
     };
 
     private final static String[] ADMIN_LIST ={
-            "/api/user/**",
-            "/api/categoria/**",
-            "/api/articulo/**",
-            "/api/almacen/get/**",
-            "/api/almacen/save/",
-            "/api/almacen/update/**",
-            "/api/almacen/delete/**",
-            "/api/auth/regresarContrasena/**",
+            "/api/usuario/**",
             "/api/bitacora/**",
+            "/api/roles/**",
     };
     private final static String[] MERGE_LIST ={
-            "/api/almacen/createArticulo/**",
-            "/api/articulo/**",
-            "/api/auth/updatePassword/**",
+            "/api/vehiculo/**",
+            "/api/servicio/**",
+            "/api/categoria/**",
+            "/api/vehserv/**",
+            "/api/estado-vehiculo/**",
     };
 
     public static String[] getMERGE_LIST() {
@@ -115,7 +111,9 @@ public class MainSecurity implements WebMvcConfigurer {
 
         http.cors(Customizer.withDefaults()).csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req ->
-                        req.requestMatchers("/api/**").permitAll()
+                        req.requestMatchers(WHITE_LIST).permitAll()
+                                .requestMatchers(ADMIN_LIST).hasAnyAuthority("ADMIN")
+                                .requestMatchers(MERGE_LIST).hasAnyAuthority("ADMIN", "USER","MECHANIC")
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
