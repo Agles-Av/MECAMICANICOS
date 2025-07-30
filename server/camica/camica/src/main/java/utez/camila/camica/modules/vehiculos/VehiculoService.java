@@ -32,11 +32,11 @@ public class VehiculoService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> getActiveVehicles() {
-        return response.getJSONResponse(vehiculoRepository.findByActivoTrue());
+        return response.getJSONResponse(vehiculoRepository.findByStatusTrue());
     }
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> getInactiveVehicles() {
-        return response.getJSONResponse(vehiculoRepository.findByActivoFalse());
+        return response.getJSONResponse(vehiculoRepository.findByStatusFalse());
     }
 
     @Transactional(rollbackFor = Exception.class)
