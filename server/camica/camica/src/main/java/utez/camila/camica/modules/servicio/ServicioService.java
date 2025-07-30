@@ -27,6 +27,15 @@ public class ServicioService {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?>getByStatusTrue() {
+        return response.getJSONResponse(servicioRepository.findByStatusTrue());
+    }
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getByStatusFalse() {
+        return response.getJSONResponse(servicioRepository.findByStatusFalse());
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save (Servicio servicio) {
         if (servicio.getNombre() == null || servicio.getNombre().isEmpty()) {
             return response.getBadRequest("El nombre del servicio es obligatorio");

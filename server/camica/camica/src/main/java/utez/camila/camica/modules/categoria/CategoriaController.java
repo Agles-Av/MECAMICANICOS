@@ -21,6 +21,16 @@ public class CategoriaController {
         return categoriaService.getById(id);
     }
 
+    @GetMapping("/status/true")
+    public ResponseEntity<?> getByStatusTrue() {
+        return categoriaService.getByStatusTrue();
+    }
+    @GetMapping("/status/false")
+    public ResponseEntity<?> getByStatusFalse() {
+        return categoriaService.getByStatusFalse();
+    }
+
+
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody CategoriaDto categoria) {
         return categoriaService.save(categoria.toEntity());
@@ -30,6 +40,7 @@ public class CategoriaController {
     public ResponseEntity<?> update(@RequestBody CategoriaDto categoria, @PathVariable("id") Long id) {
         return categoriaService.update(id, categoria.toEntity());
     }
+
 
     @PatchMapping("/status/{id}/")
     public ResponseEntity<?> changeStatus(@PathVariable("id") Long id) {

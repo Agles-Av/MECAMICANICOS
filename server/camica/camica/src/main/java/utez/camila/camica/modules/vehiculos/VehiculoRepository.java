@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
     List<Vehiculo> findByDuenio(Usuario duenio);
     Optional<Vehiculo> findByModelo(String modelo);
+    List<Vehiculo> findByActivoTrue();
+    List<Vehiculo> findByActivoFalse();
 }

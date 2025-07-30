@@ -21,6 +21,15 @@ public class VehiculoController {
         return vehiculoService.getByDuenio(duenioId);
     }
 
+    @GetMapping("/status/true")
+    public ResponseEntity<?> getActiveVehicles() {
+        return vehiculoService.getActiveVehicles();
+    }
+    @GetMapping("/status/false")
+    public ResponseEntity<?> getInactiveVehicles() {
+        return vehiculoService.getInactiveVehicles();
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> save(@RequestBody VehiculoDto vehiculo) {
         return vehiculoService.save(vehiculo.toEntity());
