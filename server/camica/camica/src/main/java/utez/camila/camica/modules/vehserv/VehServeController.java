@@ -17,22 +17,22 @@ public class VehServeController {
     }
 
     @GetMapping("/estado/{estadoId}/")
-    public ResponseEntity<?> getByEstado(Long estadoId) {
+    public ResponseEntity<?> getByEstado(@PathVariable("estadoId") Long estadoId) {
         return vehServService.getByEstado(estadoId);
     }
 
     @GetMapping("/mecanico/{mecanicoId}/")
-    public ResponseEntity<?> getByMecanico(Long mecanicoId) {
+    public ResponseEntity<?> getByMecanico(@PathVariable("mecanicoId") Long mecanicoId) {
         return vehServService.getByMecanico(mecanicoId);
     }
 
     @GetMapping("/servicio/{servicioId}/")
-    public ResponseEntity<?> getByServicio(Long servicioId) {
+    public ResponseEntity<?> getByServicio(@PathVariable("servicioId") Long servicioId) {
         return vehServService.getByServicio(servicioId);
     }
 
     @GetMapping("/vehiculo/{vehiculoId}/")
-    public ResponseEntity<?> getByVehiculo(Long vehiculoId) {
+    public ResponseEntity<?> getByVehiculo(@PathVariable("vehiculoId") Long vehiculoId) {
         return vehServService.getByVehiculo(vehiculoId);
     }
 
@@ -44,6 +44,11 @@ public class VehServeController {
     @PutMapping("/{id}/")
     public ResponseEntity<?> update(@RequestBody VehServeDto vehServeDto, @PathVariable("id") Long id) {
         return vehServService.update( id, vehServeDto.toEntity());
+    }
+
+    @PutMapping("/mecanico/{idVehServe}/{idMecanico}/")
+    public ResponseEntity<?> updateMecanico(@PathVariable("idVehServe") Long idVehServe, @PathVariable("idMecanico") Long idMecanico) {
+        return vehServService.changeMecanico(idVehServe, idMecanico);
     }
 
     @PatchMapping("/status/{idVehServe}/{idEstado}/")

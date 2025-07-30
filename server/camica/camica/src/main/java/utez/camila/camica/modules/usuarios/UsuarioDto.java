@@ -17,7 +17,7 @@ public class UsuarioDto {
     private Roles role;
 
     public Usuario toEntity(){
-        return new Usuario(id, nombre, apellidos, email, contrasena, telefono, status, role);
+        return new Usuario(nombre, apellidos, email, contrasena, telefono, status, role);
     }
 
     public UsuarioDto() {

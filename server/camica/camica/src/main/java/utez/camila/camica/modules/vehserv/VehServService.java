@@ -146,6 +146,25 @@ public class VehServService {
         return response.getJSONResponse(vehServeRepository.save(existingVehServe));
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> changeMecanico(Long idVehServ, Long idMecanico){
+        Optional<VehServe> foundVehServ = vehServeRepository.findById(idVehServ);
+        if (foundVehServ.isEmpty()) {
+            return response.getBadRequest("Vehiculo no encontrado");
+        }
+        VehServe vehServ = foundVehServ.get();
+
+        Optional<Usuario> foundMecanico = usuarioRepository.findById(idMecanico);
+        if (foundMecanico.isEmpty()) {
+            return response.getBadRequest("Mecanico no encontrado");
+        }
+
+        vehServ.setMecanico(foundMecanico.get());
+        vehServeRepository.saveAndFlush(vehServ);
+        bitacoraService.registrarBitacora("CHANGE_MECHANIC", "vehServ", null, vehServ);
+        return response.getJSONResponse(vehServeRepository.save(vehServ));
+    }
+
 
 
     @Transactional(rollbackFor = Exception.class)

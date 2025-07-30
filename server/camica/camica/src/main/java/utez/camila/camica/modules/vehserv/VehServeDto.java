@@ -13,7 +13,7 @@ public class VehServeDto {
     private Servicio servicio;
 
     public VehServe toEntity() {
-        return new VehServe(id, vehiculo, mecanico, estado, servicio);
+        return new VehServe(vehiculo, mecanico, estado, servicio);
     }
 
     public VehServeDto() {

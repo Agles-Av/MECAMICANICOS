@@ -46,6 +46,12 @@ public class VehServe {
         this.servicio = servicio;
     }
 
+    public VehServe(Vehiculo vehiculo, EstadoVehiculo estado, Servicio servicio) {
+        this.vehiculo = vehiculo;
+        this.estado = estado;
+        this.servicio = servicio;
+    }
+
     public VehServe(Long id, Vehiculo vehiculo, Usuario mecanico, EstadoVehiculo estado, Servicio servicio) {
         this.id = id;
         this.vehiculo = vehiculo;
