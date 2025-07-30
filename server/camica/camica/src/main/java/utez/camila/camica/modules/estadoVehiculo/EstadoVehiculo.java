@@ -22,7 +22,7 @@ public class EstadoVehiculo {
 
 
     @OneToMany(mappedBy = "estado", cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties(value = {"vehiculo","estado"})
+    @JsonIgnoreProperties(value = {"vehiculo","estado","servicio"})
     private List<VehServe> servicios;
 
     public EstadoVehiculo() {

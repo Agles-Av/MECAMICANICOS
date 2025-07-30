@@ -8,6 +8,7 @@ import utez.camila.camica.modules.usuarios.Usuario;
 import utez.camila.camica.modules.vehiculos.Vehiculo;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface VehServeRepository extends JpaRepository<VehServe, Long> {
@@ -18,4 +19,8 @@ public interface VehServeRepository extends JpaRepository<VehServe, Long> {
     List<VehServe> findVehServesByServicio(Servicio servicio);
 
     List<VehServe> findVehServesByVehiculo(Vehiculo vehiculo);
+
+
+    Optional<VehServe> findByVehiculoAndEstadoAndServicio(Vehiculo vehiculo, EstadoVehiculo estado, Servicio servicio);
+
 }

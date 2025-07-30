@@ -45,11 +45,11 @@ public class Usuario {
     private Roles role;
 
     @OneToMany(mappedBy = "duenio",cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties(value = {"duenio"})
+    @JsonIgnoreProperties(value = {"duenio","servicios"})
     private List<Vehiculo> vehiculo;
 
     @OneToMany(mappedBy = "mecanico", cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties(value = {"mecanico"})
+    @JsonIgnoreProperties(value = {"mecanico","servicio"})
     private List<VehServe> servicios;
 
     @Column(name = "intentos_fallidos")

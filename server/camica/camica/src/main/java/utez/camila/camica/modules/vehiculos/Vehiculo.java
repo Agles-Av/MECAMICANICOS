@@ -34,7 +34,7 @@ public class Vehiculo {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    @JsonIgnoreProperties(value = {"usuario"})
+    @JsonIgnoreProperties(value = {"usuario","vehiculo"})
     private Usuario duenio;
 
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.PERSIST)

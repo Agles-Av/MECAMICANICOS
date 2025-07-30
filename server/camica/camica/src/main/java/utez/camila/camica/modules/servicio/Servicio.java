@@ -1,5 +1,6 @@
 package utez.camila.camica.modules.servicio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import utez.camila.camica.modules.categoria.Categoria;
@@ -35,7 +36,7 @@ public class Servicio {
     private Boolean status;
 
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.PERSIST)
-    @JsonIgnoreProperties(value = {"servicio"})
+    @JsonIgnore
     private List<VehServe> servicioVehiculo;
 
     public Servicio(String nombre, String descripcion, Categoria categoria, Boolean status) {
