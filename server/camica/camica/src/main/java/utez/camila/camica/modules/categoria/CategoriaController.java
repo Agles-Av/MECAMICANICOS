@@ -21,11 +21,12 @@ public class CategoriaController {
         return categoriaService.getById(id);
     }
 
-    @GetMapping("/status/true")
+    @GetMapping("/status/true/")
     public ResponseEntity<?> getByStatusTrue() {
         return categoriaService.getByStatusTrue();
     }
-    @GetMapping("/status/false")
+
+    @GetMapping("/status/false/")
     public ResponseEntity<?> getByStatusFalse() {
         return categoriaService.getByStatusFalse();
     }

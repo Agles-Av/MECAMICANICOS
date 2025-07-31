@@ -46,12 +46,12 @@ public class VehServeController {
         return vehServService.update( id, vehServeDto.toEntity());
     }
 
-    @PutMapping("/mecanico/{idVehServe}/{idMecanico}/")
+    @PutMapping("/cambio-mecanico/{idVehServe}/{idMecanico}/")
     public ResponseEntity<?> updateMecanico(@PathVariable("idVehServe") Long idVehServe, @PathVariable("idMecanico") Long idMecanico) {
         return vehServService.changeMecanico(idVehServe, idMecanico);
     }
 
-    @PatchMapping("/status/{idVehServe}/{idEstado}/")
+    @PatchMapping("/cambio-estado/{idVehServe}/{idEstado}/")
     public ResponseEntity<?> changeStatus(@PathVariable("idVehServe") Long idVehServe, @PathVariable("idEstado") Long idEstado) {
         return vehServService.changeStatus(idVehServe, idEstado);
     }

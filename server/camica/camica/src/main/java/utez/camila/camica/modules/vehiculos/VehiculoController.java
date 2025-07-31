@@ -21,11 +21,12 @@ public class VehiculoController {
         return vehiculoService.getByDuenio(duenioId);
     }
 
-    @GetMapping("/status/true")
+    @GetMapping("/status/true/")
     public ResponseEntity<?> getActiveVehicles() {
         return vehiculoService.getActiveVehicles();
     }
-    @GetMapping("/status/false")
+
+    @GetMapping("/status/false/")
     public ResponseEntity<?> getInactiveVehicles() {
         return vehiculoService.getInactiveVehicles();
     }
