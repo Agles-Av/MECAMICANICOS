@@ -16,11 +16,12 @@ public class ServicioController {
         return servicioService.getAll();
     }
 
-    @GetMapping("status/true")
+    @GetMapping("status/true/")
     public ResponseEntity<?> getByStatusTrue() {
         return servicioService.getByStatusTrue();
     }
-    @GetMapping("status/false")
+
+    @GetMapping("status/false/")
     public ResponseEntity<?> getByStatusFalse() {
         return servicioService.getByStatusFalse();
     }

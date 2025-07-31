@@ -130,6 +130,7 @@ public Vehiculo getOrSaveVehiculo(Vehiculo vehiculo) {
         EstadoVehiculo estado1 = getOrSaveEstado(new EstadoVehiculo("En espera"));
         EstadoVehiculo estado2 = getOrSaveEstado(new EstadoVehiculo("En proceso"));
         EstadoVehiculo estado3 = getOrSaveEstado(new EstadoVehiculo("Finalizado"));
+        EstadoVehiculo estado4 = getOrSaveEstado(new EstadoVehiculo("Cancelado"));
 
         Servicio servicio1 = getOrSaveServicio(new Servicio("Cambio de aceite", "Cambio de aceite del motor", categoria1, true));
         Servicio servicio2 = getOrSaveServicio(new Servicio("Cambio de frenos", "Cambio de frenos del vehiculo", categoria2, true));
