@@ -128,9 +128,6 @@ public class VehServService {
             return response.getBadRequest("Servicio no encontrado");
         }
 
-        if(vehServe.getMecanico() != null || vehServe.getMecanico().getId() != null) {
-            return response.getBadRequest("Mecanico no proporcionado");
-        }
         Optional<Usuario> foundMecanico = usuarioRepository.findById(vehServe.getMecanico().getId());
         if (foundMecanico.isEmpty()) {
             return response.getBadRequest("Mecanico no encontrado");
