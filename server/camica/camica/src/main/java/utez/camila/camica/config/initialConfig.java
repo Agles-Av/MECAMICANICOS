@@ -122,6 +122,7 @@ public Vehiculo getOrSaveVehiculo(Vehiculo vehiculo) {
         Usuario usuario1 = getOrSaveUsuario(new Usuario("Valentin","Roque", "20223tn029@utez.edu.mx", encoder.encode("123456"), "777963299", true, userRole));
         Usuario usuario2 = getOrSaveUsuario(new Usuario("Cristian","Saldaña", "20223tn030@utez.edu.mx", encoder.encode("123456"), "7773742539", true, userRole));
         Usuario usuarioMech = getOrSaveUsuario(new Usuario("Alex", "Martinez","correo@gail.com", encoder.encode("123456"), "7773742539", true, mechanicRole));
+        Usuario usuarioMech2 = getOrSaveUsuario(new Usuario("Eddie", "Bahena","correo2@gail.com", encoder.encode("123456"), "7771236939", true, mechanicRole));
 
         Categoria categoria1 = getOrSaveCategoria(new Categoria("Mantenimiento","mantenimiento así bien chido", true));
         Categoria categoria2 = getOrSaveCategoria(new Categoria("Reparación","Reparación así bien chida", true));
