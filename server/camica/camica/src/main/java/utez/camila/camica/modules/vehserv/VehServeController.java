@@ -37,7 +37,7 @@ public class VehServeController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<?> create(VehServeDto vehServeDto) {
+    public ResponseEntity<?> create(@RequestBody VehServeDto vehServeDto) {
         return vehServService.save(vehServeDto.toEntity());
     }
 

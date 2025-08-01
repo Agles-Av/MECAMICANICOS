@@ -79,6 +79,7 @@ public class VehServService {
 
     @Transactional(rollbackFor = Exception.class)
     public ResponseEntity<?> save(VehServe vehServe) {
+       // System.out.println(vehServe);
         Optional<Servicio> foundServicio = servicioRepository.findById(vehServe.getServicio().getId());
         if (foundServicio.isEmpty()) {
             return response.getBadRequest("Servicio no encontrado");
