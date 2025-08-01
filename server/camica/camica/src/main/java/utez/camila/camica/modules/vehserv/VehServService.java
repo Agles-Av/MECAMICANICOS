@@ -88,6 +88,9 @@ public class VehServService {
         if (foundMecanico.isEmpty()) {
             return response.getBadRequest("Mecanico no encontrado");
         }
+        if(!foundMecanico.get().getRole().getNombre().equals("MECHANIC")) {
+            return response.getBadRequest("El usuario no es un mecanico");
+        }
         Optional<EstadoVehiculo> foundEstado = estadoRepository.findById(vehServe.getEstado().getId());
         if (foundEstado.isEmpty()) {
             return response.getBadRequest("Estado no encontrado");
@@ -125,6 +128,9 @@ public class VehServService {
         Optional<Usuario> foundMecanico = usuarioRepository.findById(vehServe.getMecanico().getId());
         if (foundMecanico.isEmpty()) {
             return response.getBadRequest("Mecanico no encontrado");
+        }
+        if(!foundMecanico.get().getRole().getNombre().equals("MECHANIC")) {
+            return response.getBadRequest("El usuario no es un mecanico");
         }
 
         Optional<EstadoVehiculo> foundEstado = estadoRepository.findById(vehServe.getEstado().getId());
