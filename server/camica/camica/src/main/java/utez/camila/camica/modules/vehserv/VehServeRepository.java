@@ -23,4 +23,5 @@ public interface VehServeRepository extends JpaRepository<VehServe, Long> {
 
     Optional<VehServe> findByVehiculoAndEstadoAndServicio(Vehiculo vehiculo, EstadoVehiculo estado, Servicio servicio);
 
+    List<VehServe> findAllByMecanicoIsNull();
 }
