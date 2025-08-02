@@ -6,13 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/camla/auth/password")
+@RequestMapping("/api/auth/password")
 @CrossOrigin("*")
 public class PasswordResetController {
 
     @Autowired
     private PasswordResetService passwordResetService;
-
     @PostMapping("/request-reset")
     public ResponseEntity<?> requestReset(@RequestParam("email") String email) {
         try {
