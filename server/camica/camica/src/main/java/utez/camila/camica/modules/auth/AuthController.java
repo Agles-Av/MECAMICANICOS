@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import utez.camila.camica.modules.usuarios.UsuarioDto;
+import utez.camila.camica.modules.usuarios.UsuarioService;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -11,6 +12,9 @@ import utez.camila.camica.modules.usuarios.UsuarioDto;
 public class AuthController {
     @Autowired
     private AuthService authService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto dto){
@@ -25,5 +29,10 @@ public class AuthController {
     @PutMapping("/updatePassword/{id}")
     public ResponseEntity<?> updatePassword(@PathVariable("id") Long id, @RequestBody LoginDto coso){
         return authService.updatePassword(id, coso);
+    }
+
+    @PutMapping("/updateProfile/{id}")
+    public ResponseEntity<?> updateProfile(@PathVariable("id") Long id, @RequestBody UsuarioDto usuario){
+        return usuarioService.update(usuario.toEntity(), id);
     }
 }
