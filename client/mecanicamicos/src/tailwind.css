@@ -1,0 +1,62 @@
+@import "tailwindcss";
+@plugin "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+:root {
+  --mafia-black: #1a1a1a;
+  --mafia-gold: #d4af37;
+  --mafia-red: #8b0000;
+  --mafia-silver: #c0c0c0;
+  --mafia-gray: #2d2d2d;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: var(--mafia-black);
+  color: #ffffff;
+}
+
+.mafia-title {
+  font-family: "Bebas Neue", cursive;
+  color: var(--mafia-gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.mafia-card {
+  background: linear-gradient(135deg, var(--mafia-gray) 0%, var(--mafia-black) 100%);
+  border: 1px solid var(--mafia-gold);
+  box-shadow: 0 8px 32px rgba(160, 134, 47, 0.1);
+}
+
+.mafia-button {
+  background: linear-gradient(135deg, var(--mafia-gold) 0%, #b8941f 100%);
+  color: var(--mafia-black);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.mafia-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+.mafia-input {
+  background-color: rgba(45, 45, 45, 0.8);
+  border: 2px solid transparent;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.mafia-input:focus {
+  border-color: var(--mafia-gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.sidebar-gradient {
+  background: linear-gradient(180deg, var(--mafia-black) 0%, var(--mafia-gray) 50%, var(--mafia-black) 100%);
+}
