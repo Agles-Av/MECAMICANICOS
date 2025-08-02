@@ -195,4 +195,9 @@ public class VehServService {
         bitacoraService.registrarBitacora("CHANGE_STATUS", "vehServ", null, vehServ);
         return response.getJSONResponse(vehServeRepository.save(vehServ));
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public ResponseEntity<?> getSinAsignar() {
+        return response.getJSONResponse(vehServeRepository.findAllByMecanicoIsNull());
+    }
 }

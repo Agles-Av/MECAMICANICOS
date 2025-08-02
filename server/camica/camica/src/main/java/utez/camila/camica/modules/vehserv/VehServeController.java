@@ -36,6 +36,11 @@ public class VehServeController {
         return vehServService.getByVehiculo(vehiculoId);
     }
 
+    @GetMapping("/mecanico-sin-asignar/")
+    public ResponseEntity<?> getSinAsignar() {
+        return vehServService.getSinAsignar();
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> create(@RequestBody VehServeDto vehServeDto) {
         return vehServService.save(vehServeDto.toEntity());
