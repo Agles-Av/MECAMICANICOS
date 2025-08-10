@@ -65,11 +65,11 @@ public class CustomResponse {
     }
 
 
-    public ResponseEntity<String> getBadRequest(String message) {
+    public ResponseEntity<Map<String, Object>> getBadRequest(String message) {
         body = new HashMap<>();
         body.put("message", message);
         body.put("status", "Bad Request");
 
-        return new ResponseEntity<>(body.toString(), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 }
