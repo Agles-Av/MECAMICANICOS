@@ -12,6 +12,7 @@ public class PasswordResetController {
 
     @Autowired
     private PasswordResetService passwordResetService;
+
     @PostMapping("/request-reset")
     public ResponseEntity<?> requestReset(@RequestParam("email") String email) {
         try {
